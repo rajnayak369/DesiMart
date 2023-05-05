@@ -1,0 +1,33 @@
+{% extends './base.html' %}
+{% block content %}
+
+<div class="container" style="width:60%; margin-top:4%">
+
+    <form method="post" style="border: 5px solid #f1f1f1;background-color:#ffffe6;">
+    <h2 style="margin-left:40%"> <b> Registration</b></h2>
+
+            {% csrf_token %}
+            <p style="color: red">* indicates the filed is required </p>
+            {% for field in form %}
+            <p>
+                <label class="form-label" style="margin-left:5%">{{ field.label_tag}}*</label>
+              {{ field }}
+              {% if field.help_text %}
+              <small style="color: grey">{{ field.help_text }}</small>
+              {% endif %}
+                {% for error in field.errors %}
+            {% if error != "This field is required."%}
+                <p style="color: red">{{ error}} </p>
+            {% endif %}
+      {% endfor %}
+            </p>
+            {% endfor %}
+        <div class="d-grid gap-2">
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Register
+    </button>
+  </div>
+
+      </form>
+      </div >
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends './base.html' %}
+{% block content %}
+
+
+<div class="container" style="background-color:white; margin-top:8%" >
+    <main class="pt-5">
+        <div class="row g-3">
+            <div class="col-md-5 col-lg-5 order-md-first bg-light">
+                <h3>Address details: </h3>
+                <form action="{% url 'desi_mart:place_order' %}" method="post" style="border: 5px solid #f1f1f1;background-color:#ffffe6;">
+                    <div class="container" style="padding: 16px;">
+                    {% csrf_token %}
+                        <label class="form-label" for="name"><b>First name:*</b></label>
+                        <input type="text" placeholder="Enter Fullname" name="first_name" style="margin:10px" required>
+                        <br>
+
+                        <label class="form-label"for="name"><b>Last name:*</b></label>
+                        <input type="text" placeholder="Enter Fullname" name="last_name" style="margin:10px" required> <br>
+
+                        <label class="form-label" for="email"><b>Email Id:*</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" style="margin:10px" required> <br>
+
+                         <label class="form-label" for="address"><b>Address:*</b></label>
+                         <input type="text" placeholder="Enter Address" name="address" style="margin:10px" required> <br>
+                    <button class="btn btn-primary btn-sm" type="submit">Save address </button>
+        </div>
+                </form>
+            </div>
+            <div class="col-md-5 col-lg-5 ps-md-3 ps-lg-5">
+                <h1 class="mb-0 h4">Billing Summary</h1>
+                <p><span class="lead">Total:£{{ basket.get_total_price }}</span> </p>
+                <p>{{ product.description|slice:":355" }}...</p>
+                <div class="border">
+                    <div class="col border-bottom">
+                        <div class="row p-3">
+                            <div class="col-6">Total cart price:</div>
+                            <div class="col-6 text-end"><span class="h4 fw-bold">£{{ basket.get_total_price }}</span></div>
+                            <div class="col-6">Delivery type:</div>
+                            <div class="col-6 text-end"><span class="h4 fw-bold">Cash on delivery</span></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row p-3">
+                            <button type="button" class="btn btn-primary btn-sm" disabled>Place order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+ {% endblock %}

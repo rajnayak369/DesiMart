@@ -1,0 +1,63 @@
+{% extends 'desi_mart/base.html' %}
+{% block style %}
+      <style>
+            element.style{
+            background-image: none;
+            background-color: #99CCFF;
+
+            }
+
+      </style>
+{% endblock %}
+{% block content %}
+
+
+
+<div class="container" style="width:50%; margin-top:10%">
+<form class="account-form" action="{% url 'desi_mart:login' %}" method="post" style="border: 5px solid #f1f1f1;background-color:#ffffe6;">
+  {% csrf_token %}
+
+     {% if form.errors %}
+    <div class="alert alert-primary" role="alert">
+       <p>Your username and password didn't match. Please try again.</p>
+    </div>
+    {% endif %}
+    {%if next %}
+    {% if request.user.is_authenticated %}
+    <!-- proceed to requested page-->
+    {% else %}
+    <div class="alert alert-primary" role="alert">
+    <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    </div>
+
+    {% endif %}
+  {% endif %}
+  <h3 class="mb-4" style="margin-left:40%">Login Page</h3>
+    <div class="row g-3">
+    <div class="col-sm-7">
+      <label  class="form-label" style="margin:15px">{{ form.username.label}}:</label>
+                    {{ form.username}}
+    </div>
+
+    <div class="col-sm-7">
+      <label  class="form-label" style="margin:15px">{{ form.password.label}}:</label>
+                    {{ form.password}}
+    </div>
+    </div>
+
+
+  <div class="d-grid gap-2">
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Log in
+    </button>
+  </div>
+  <div class="flex-column justify-content-center mx-auto pb-3">
+    <div class="text-center"><a href="{% url 'desi_mart:signup' %}">Create an account</a></div>
+  </div>
+</form>
+
+</div>
+
+
+    {% endblock %}

@@ -1,0 +1,44 @@
+{% extends './base.html' %}
+{% block content %}
+
+
+<div class="container" style="background-color:white; margin-top:8%" >
+    <main class="pt-5">
+        <div class="row g-3">
+            <div class="col-md-5 col-lg-5 order-md-first bg-light">
+                <h3>Address details: </h3>
+                {% if user.is_authenticated %}
+                <p> Full name: {{ user.first_name}} {{ user.last_name}}</p>
+                 <p> Email: {{user.email}}</p>
+                 <p> Delivery Address: {{ user.customer.address}}</p>
+                {% else %}
+                <p> Fullname: {{first_name}} {{last_name}}</p>
+                 <p> Email: {{email}}</p>
+                 <p> Delivery Address: {{address}}</p>
+                {% endif %}
+            </div>
+            <div class="col-md-5 col-lg-5 ps-md-3 ps-lg-5">
+                <h1 class="mb-0 h4">Billing Summary</h1>
+                <p><span class="lead">Total:£{{ basket.get_total_price }}</span> </p>
+                <p>{{ product.description|slice:":355" }}...</p>
+                <div class="border">
+                    <div class="col border-bottom">
+                        <div class="row p-3">
+                            <div class="col-6">Total cart price:</div>
+                            <div class="col-6 text-end"><span class="h4 fw-bold">£{{ basket.get_total_price }}</span></div>
+                            <div class="col-6">Delivery type:</div>
+                            <div class="col-6 text-end"><span class="h4 fw-bold">Cash on delivery</span></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row p-3">
+                            <button type="button" onclick="location.href='{% url 'desi_mart:orderplaced' %}'" class="btn btn-primary btn-sm">Place order</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+ {% endblock %}

@@ -1,0 +1,70 @@
+{% extends "./base.html" %}
+{% load static %}
+{% block title %}
+{{ product.name }}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <main class="pt-5">
+        <div class="row g-3" style="margin-left:15%">
+            <div class="col-md-5 col-lg-5 order-md-first bg-light">
+                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ product.imageLink }}">
+            </div>
+            <div class="col-md-5 col-lg-5 ps-md-3 ps-lg-5" style="background-color:white">
+                <h1 class="mb-0 h4">{{ product.title }}</h1>
+                <p><span class="lead">{{ product.price }}£</span> (price)</p>
+                <p>{{ product.description|slice:":355" }}...</p>
+                <div class="border">
+                    <div class="col border-bottom">
+                        <div class="row p-3">
+                            <div class="col-6">Original Price</div>
+                            <div class="col-6 text-end"><span class="h4 fw-bold">£{{ product.price }}</span></div>
+                            <div class="col-6">Discount Price</div>
+                            <div class="col-6 text-end"><span class="h4 fw-bold">£{{ product.discount_price }}</span></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row p-3">
+                             <form action="{% url 'desi_mart:basket_add' product.id %}" method="post">
+                                      {{ basket_product_form }}
+                                      {% csrf_token %}
+                                      <input type="submit" class="btn btn-primary btn-sm" style="margin-left:50%" value="Add to Basket">
+                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <br> <br>
+        <div class="album py-5 bg-light">
+            <div class="container">
+
+              <div class="pb-3 h5">Similar Products</div>
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+
+                {% for product in products %}
+
+                <div class="col">
+                  <div class="card shadow-sm">
+                      <a class="text-dark text-decoration-none" href="{% url 'desi_mart:product_detail' product.id %}"> <img class="img-fluid" alt="Responsive image" src="{{ product.imageLink}}"></a>
+                    <div class="card-body">
+                      <p class="card-text">
+                        <a class="text-dark text-decoration-none" href="{% url 'desi_mart:product_detail' product.id %}">{{ product.title }}</a>
+                      </p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">£{{ product.discount_price }} </small>
+                        <button type="button" onclick="location.href='{% url 'desi_mart:product_detail' product.id %}'" class="btn btn-primary btn-sm">view details</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {% endfor %}
+
+              </div>
+            </div>
+          </div>
+    </main>
+
+</div>
+{% endblock %}
