@@ -5,6 +5,15 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+class Cart(models.Model):
+    product = models.ForeignKey('desi_mart.Product', on_delete=models.CASCADE, related_name='carts')
+    quantity = models.IntegerField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.product},{self.quantity},{self.created_date}'
+
+
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, )
     address = models.TextField()
@@ -33,6 +42,16 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+class LineItem(models.Model):
+    quantity = models.IntegerField()
+    product = models.ForeignKey('desi_mart.Product', on_delete=models.CASCADE)
+    cart = models.ForeignKey('desi_mart.Cart', on_delete=models.CASCADE)
+    order = models.ForeignKey('desi_mart.Order', on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.quantity},{self.product},{self.cart},{self.order},{self.created_date}'
 
 
 class Product(models.Model):

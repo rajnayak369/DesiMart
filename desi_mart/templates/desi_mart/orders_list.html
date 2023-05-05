@@ -1,0 +1,14 @@
+  {% extends './base.html' %}
+  {% block content %}
+
+  <div class="container" style="background-color:white; margin-top:3%">
+    <h1>Order List</h1>
+    
+    {% for order in orders %}
+    <p>This is order <b> <a href="{% url 'desi_mart:order_detail' id=order.id %}">{{order.id }}</a></b> for
+       {{order.customer.user.first_name}}. The order was placed on: {{ order.created_date }}
+    </p>
+    {% endfor %}
+  </div>
+
+    {% endblock %}

@@ -46,12 +46,36 @@
                      </form>
                         </li>
 
+
                     </ul>
-                <ul class="navbar-nav me-auto mb-4 mb-md-0" style="margin-left:42%;">
+                <ul class="navbar-nav me-auto mb-4 mb-md-0" style="margin-left:30%;">
+
+                    {% if user.is_staff %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin tools
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item active">
+                            <a class="nav-link" aria-current="page" href="{% url 'desi_mart:dashboard' %}">Dashboard</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" aria-current="page" href="{% url 'desi_mart:orders' %}">All Orders</a>
+                        </li>
+                            </ul>
+                        </li>
+
+                         {% endif %}
+
                     {% if user.is_authenticated %}
+                    <li class="nav-item active">
+                            <a class="nav-link" aria-current="page" href="{% url 'desi_mart:myorders' user.id %}">View orders</a>
+                        </li>
                     <li class="nav-item active">
                             <a class="nav-link" aria-current="page" href="{% url 'desi_mart:logout' %}">Log Out</a>
                         </li>
+
                         {% else %}
                         <li class="nav-item active">
                             <a class="nav-link" aria-current="page" href="{% url 'desi_mart:login' %}">Log in/sign up</a>

@@ -18,5 +18,9 @@ urlpatterns = [
     path('signup/', views.general.signup, name='signup'),
     path('place_order/', views.general.place_order, name='place_order'),
     path('order/success', views.general.order_success, name='orderplaced'),
+    path('orders/', views.general.order_list, name='orders'),
+    path('myorders/<int:id>', views.general.myorders, name='myorders'),
+    path('order/<int:id>/', views.general.order_detail, name='order_detail'),
+    path('dashboard/', views.general.dashboard, name='dashboard'),
 
 ]

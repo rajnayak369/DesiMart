@@ -1,8 +1,10 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from desi_mart.models import Category, Product
+from desi_mart.models import Category, Product, Order, Customer, Cart, LineItem
 from desi_mart.forms import SignUpForm
+from django.contrib.auth.models import User
+
 
 import random
 
@@ -52,6 +54,51 @@ def place_order(request):
 
 def order_success(request):
     basket = Basket(request)
+    user = request.user
+    customer = get_object_or_404(Customer, user_id=user.id)
+    order = Order.objects.create(customer=customer)
+    order.refresh_from_db()
+    for item in basket:
+        product_item = get_object_or_404(Product, id=item['product_id'])
+        cart = Cart.objects.create(product = product_item, quantity=item['quantity'])
+        cart.refresh_from_db()
+        line_item = LineItem.objects.create(quantity=item['quantity'], product=product_item, cart=cart,  order = order)
+        line_item.refresh_from_db()
+
     basket.clear()
     request.session['deleted'] = 'thanks for your purchase'
     return render(request,'desi_mart/orderplaced.html')
+
+
+def order_list(request):
+    orders = Order.objects.all()
+    return render(request, 'desi_mart/orders_list.html', {'orders' : orders})
+
+def myorders(request,id):
+    customer = get_object_or_404(Customer, user_id=id)
+    orders = Order.objects.filter(customer=customer)
+    return render(request, 'desi_mart/orders_list.html', {'orders' : orders})
+
+
+
+def order_detail(request, id):
+    order = get_object_or_404(Order, id=id)
+    customer = order.customer
+    user = get_object_or_404(User, id=customer.pk)
+    line_items = LineItem.objects.filter(order_id=order.id)
+    return render(request, 'desi_mart/order_detail.html', {'order' : order, 'user': user, 'line_items': line_items})
+
+
+@login_required
+def dashboard(request):
+    user = request.user
+    if user.is_authenticated & user.is_staff:
+        dataset = [];
+        for x in range(0,14):
+            num = random.randrange(10,100)
+            dataset.append(num)
+        return render(request, 'desi_mart/dashboard.html',{'dataset': dataset})
+    else:
+        return redirect('desi_mart:login')
+
+

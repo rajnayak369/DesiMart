@@ -1,0 +1,71 @@
+{% extends "./base.html" %}
+{% block title %} Global Temperature Tracking{% endblock %}
+{% block style %}
+      <style>
+            .conta{
+            background-image: none;
+            background-color: #99CCFF;
+           
+            }
+            .conta::after{
+            background-color: white;
+            max-width:1500px;
+            }
+      </style>
+{% endblock %}
+{% block content %}
+
+<div id="chart-wrapper" style="background-color:white">
+<canvas id="myChart"></canvas>
+      <input id="button" type="button" value="change chart type" style="margin-bottom:10px; margin-top:10px;  margin-left:45%">
+    <p style=" color:black; margin-left:30% "> *Click on change chart type button to change the chart from bar to line and vice versa</p>
+
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script type= 'text/javascript'>
+const ctx = document.getElementById('myChart').getContext('2d');
+const button = document.getElementById("button");
+
+//creating chart element
+let chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: ["Day1","Day2","Day3","Day4","Day5","Day6","Day7","Day8","Day9","Day10","Day11","Day12","Day13","Day14"],
+          datasets: [{
+              label: 'Number of orders made by customers per pday for past 2 weeks ',
+              borderColor: 'rgb(34,139,34)',
+              backgroundColor: "rgb(34,139,34)",
+              fill: false,
+              data: {{dataset}}
+                  }]
+            },
+        options: {
+            responsive: true,
+            scales: {
+                    xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Days',
+                                fontSize: 30
+                              }
+                            }],
+                    yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Order quantity',
+                                fontSize: 30
+                              }
+                            }]
+
+                    }
+             }
+});
+
+      // To change the chart type dynamically
+      button.addEventListener("click", () => {
+        chart.config.type = chart.config.type === "line" ? "bar" : "line";
+        chart.update();
+      });
+</script>
+{%endblock%}

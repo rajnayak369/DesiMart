@@ -11,7 +11,7 @@ def all_products(request):
 
 
 def category_products(request, category):
-    category_obj = Category.objects.filter(name=category).first()
+    category_obj = get_object_or_404(Category, name=category)
     products = Product.objects.filter(category=category_obj.id)
     return render(request,"desi_mart/products.html", {'products': products})
 
@@ -23,7 +23,7 @@ def search_products(request):
 
 
 def product_detail(request, id):
-    product = Product.objects.filter(id=id).first()
+    product = get_object_or_404(Product, id=id)
     products = Product.objects.filter(category=product.category)
     start = random.randrange(1, len(products))
     if len(products)-start>5:
