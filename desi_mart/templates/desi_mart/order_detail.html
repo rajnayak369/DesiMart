@@ -2,19 +2,33 @@
 {% block content %}
 
 <div class="container" style="background-color:white; margin-top:3%">
-    <h1>Order Details</h1>
-    
-    <p>Order: 
-      This is order {{ order.id }} for
-      {{user.first_name}} {{user.last_name}}. The order was placed on: {{ order.created_date }}
-   </p>
-  <p>The order includes these items:</p>
-  {% for line_item in line_items %}
-  <p>
-   Quantity: {{ line_item.quantity}}  Item: {{ line_item.product }}
-  </p>
-  
-  {% endfor %}
+
+    <div class="col-md-8 col-lg-5 ps-md-3 ps-lg-5" style="background-color:white">
+                <h1 class="mb-0 h2">Order Details</h1>
+                <p><span class="lead">{{user.first_name}}</span> (user)</p>
+                <div class="border">
+                    <div class="col border-bottom">
+                        <div class="row p-5">
+                            <div class="col-6">Order id: </div>
+                            <div class="col-6 text-end"><span class="h5 fw-bold">{{ order.id }}</span></div>
+                            <div class="col-6">Order created date</div>
+                            <div class="col-6 text-end"><span class="h8 fw-bold">{{ order.created_date }}</span></div>
+                        </div>
+                    </div>
+                    <div class="col border-bottom">
+                        <div class="row p-3">
+                            <p>The order includes these items:</p>
+                              {% for line_item in line_items %}
+                              <p>
+                               Quantity: {{ line_item.quantity}}  Item: {{ line_item.product }}
+                              </p>
+
+                             {% endfor %}
+                        </div>
+                    </div>
+                    <br> <br>
+                </div>
+            </div>
 
 </div>
    

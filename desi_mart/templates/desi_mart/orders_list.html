@@ -2,13 +2,23 @@
   {% block content %}
 
   <div class="container" style="background-color:white; margin-top:3%">
-    <h1>Order List</h1>
+     <h1 class="mb-0 h2">Order List</h1>
+                <p><span class="lead">{{user.first_name}}</span> (user)</p>
     
     {% for order in orders %}
-    <p>This is order <b> <a href="{% url 'desi_mart:order_detail' id=order.id %}">{{order.id }}</a></b> for
-       {{order.customer.user.first_name}}. The order was placed on: {{ order.created_date }}
-    </p>
+    <div class="col border-bottom">
+                        <div class="row p-3">
+
+                              <p>
+                                This is order {{order.id }}. The order was placed on: {{ order.created_date }}   <button type="button" onclick="location.href='{% url 'desi_mart:order_detail' id=order.id %}' " class="btn btn-primary btn-sm" style="margin:10px">View Order</button>
+
+                              </p>
+
+
+                        </div>
+                    </div>
     {% endfor %}
+
   </div>
 
     {% endblock %}
