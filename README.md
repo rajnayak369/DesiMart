@@ -64,6 +64,11 @@ To terminate the application use ctrl+c or follow the commands shown in terminal
 The application is deployed and you can find it using the below link:
 [Desi Mart](https://desi-mart.herokuapp.com/)
 
+## Demo Users:
+
+* ADMIN: username:admin1, password:admin1
+* CUSTOMER: username:sairaj, password:rajnayak@01
+
 ## Credits
 The data source for this application was taken from https://www.kaggle.com/datasets/satyamsundaram/jiomart-products-dataset. 
 This is a dataset containing products details from the e-commerce website Jiomart. The table contains product title, price, discount price, category and image link.
