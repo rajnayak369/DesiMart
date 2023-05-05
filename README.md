@@ -1,24 +1,19 @@
 # DesiMart
 
 ## What is the application about?
-This application was developed by a team of five as a part of coursework at the University of Aberdeen. This application helps you to visualize the  temperature recorded across the globe from year 2000 to 2014. The data can be viewed in tabular form, geographical map view and graph form. The Model-View-Template architecture pattern has been followed. The database used in this application is SQLite3. Leaflet and chart.js packages have been used to perform data visualization.
-
-## Information regarding the data.
-The Global Historical Climatology Network (GHCN) is an integrated database of climate that summaries from land surface stations across the globe. This data set contains gridded mean temperature anomalies, or departures from a reference value or long-term average, from the Global Historical Climatology Network-Monthly (GHCN-M) version 3.2.1 temperature data set.  
-The gridded anomalies were produced from GHCN-M bias corrected data. Each month of data consists of 2,592 gridded data points produced on a 5° by 5° basis for the entire globe (72 longitude by 36 latitude grid boxes).
-
-* Frequency: Monthly  
-* Period: 2000 to 2014  
-
-The data are formatted by year, month, latitude and longitude. There are 72 longitude grid values per line -- each grid is labeled as a concatenation of "lon", "w" or "e", then the degree. The latitude is captured in the "lat" field where the value indicates the lower bound of a grid cell (e.g. 85 indicates 85-90N whereas -90 indicates 85-90S). Longitude values are written from 180°W to 180°E, and latitude values from 90°N to 90°S.
+DesiMart is ecommerce website which sells Indian grocery which allows customers to purchase a wide variety of food items from the comfort of their homes. It is a one stop destination to find everything Indian. This application has a very user-friendly interface that makes it easy for customers to browse through different categories of products, add items to their shopping cart, and complete their purchase with a few clicks. The website offers a range of products, including spices, grains, lentils, snacks, sweets, and beverages that are commonly used in Indian cooking. It provides a convenient and accessible way for customers to purchase high-quality products which are essential to Indian cooking and dietary habits.
 
 ## Features
 
-GHCN web application offers you the following features to visualize the data.
-* Table feature under the visualize option helps you to view the data in tabular form.
-* Map view feature in the table view page helps you to plot the same data points  in a global map view. 
-* Charts feature under the visualize option helps you to check the variation over the years of a point on globle.
-* You can also compare the temperature variations between two different points by using the charts compare feature.
+DesiMart offers following features:
+*   Login, Register and continue as guest options for a user
+*   Product filter feature of various categories 
+*	Product view page with details of the product
+*	Similar product recommendations feature for the user
+*	Admin features like dashboard viewing, access to all user orders and reports.
+*	Search feature to browse product by a keyword.
+*	Add to cart and check out feature for a customer to place an order
+*	User can login and view orders.
 
 ## Requirements
 
