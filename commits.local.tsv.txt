@@ -1,0 +1,9 @@
+497cd88	Sairaj Naik Guguloth	Fri May 5 21:26:39 2023	readme file added
+8695bb5	Sairaj Naik Guguloth	Fri May 5 20:51:38 2023	templates updated
+0720a4f	Sairaj Naik Guguloth	Fri May 5 20:25:51 2023	admin tools added
+89d9dfd	Sairaj Naik Guguloth	Fri May 5 18:41:47 2023	proc updated
+2ed95b9	Sairaj Naik Guguloth	Fri May 5 18:40:05 2023	proc updated
+ac3ebd7	Sairaj Naik Guguloth	Fri May 5 18:32:48 2023	procfile addded
+6e0ad7f	Sairaj Naik Guguloth	Fri May 5 18:28:34 2023	minor changes
+c6a5541	Sairaj Naik Guguloth	Fri May 5 17:59:28 2023	First commit for initial deployment
+82a5d1e	rajnayak369	Wed May 3 20:01:38 2023	Create README.md
