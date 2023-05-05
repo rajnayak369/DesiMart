@@ -55,15 +55,16 @@ def place_order(request):
 def order_success(request):
     basket = Basket(request)
     user = request.user
-    customer = get_object_or_404(Customer, user_id=user.id)
-    order = Order.objects.create(customer=customer)
-    order.refresh_from_db()
-    for item in basket:
-        product_item = get_object_or_404(Product, id=item['product_id'])
-        cart = Cart.objects.create(product = product_item, quantity=item['quantity'])
-        cart.refresh_from_db()
-        line_item = LineItem.objects.create(quantity=item['quantity'], product=product_item, cart=cart,  order = order)
-        line_item.refresh_from_db()
+    if user.is_authenticated:
+        customer = get_object_or_404(Customer, user_id=user.id)
+        order = Order.objects.create(customer=customer)
+        order.refresh_from_db()
+        for item in basket:
+            product_item = get_object_or_404(Product, id=item['product_id'])
+            cart = Cart.objects.create(product = product_item, quantity=item['quantity'])
+            cart.refresh_from_db()
+            line_item = LineItem.objects.create(quantity=item['quantity'], product=product_item, cart=cart,  order = order)
+            line_item.refresh_from_db()
 
     basket.clear()
     request.session['deleted'] = 'thanks for your purchase'
